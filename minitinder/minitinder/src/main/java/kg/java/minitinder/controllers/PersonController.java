@@ -13,13 +13,8 @@ import java.util.List;
 public class PersonController {
     private  final PersonService personService;
 
-    @PostMapping("/save")
-    Person save(@RequestParam String lastName,
-                @RequestParam String firstName,
-                @RequestParam int age ){
-        return personService.save(new Person(firstName,lastName,age));
 
-    }
+
 
     @GetMapping("/find/by/id{id}")
     Person findById(@PathVariable Long id){

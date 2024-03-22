@@ -1,5 +1,8 @@
 package kg.java.minitinder.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -10,20 +13,16 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
-
+@Entity
+@Table(name = "tb_person")
 public class Person {
-
+    @Id
     Long id;
     String fisrtName;
     String lastName;
     int age;
-    List<Order> order;
 
 
-    public Person(String fisrtName, String lastName, int age) {
-        this.fisrtName = fisrtName;
-        this.lastName = lastName;
-        this.age = age;
-    }
+
+
 }
