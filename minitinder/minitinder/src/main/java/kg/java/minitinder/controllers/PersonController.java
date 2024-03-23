@@ -1,8 +1,11 @@
 package kg.java.minitinder.controllers;
 
 import kg.java.minitinder.models.Person;
+import kg.java.minitinder.models.dto.AccountCreateRequest;
 import kg.java.minitinder.services.PersonService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,17 +16,15 @@ import java.util.List;
 public class PersonController {
     private  final PersonService personService;
 
-
-
-
-    @GetMapping("/find/by/id{id}")
-    Person findById(@PathVariable Long id){
-        return personService.findById(id);
+    @PostMapping("/create")
+    ResponseEntity<?> create(@RequestBody AccountCreateRequest request){
+        try{
+            return new ResponseEntity<>(personService.create(request), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.I_AM_A_TEAPOT);
+        }
     }
 
-    @GetMapping("/find/all")
-    List<Person> findAll(){
-        return personService.findAll();
 
-    }
+
 }
