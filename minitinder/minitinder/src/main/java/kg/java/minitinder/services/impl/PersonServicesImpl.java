@@ -1,24 +1,28 @@
 package kg.java.minitinder.services.impl;
 
 import kg.java.minitinder.dao.PersonRepository;
+import kg.java.minitinder.models.Account;
 import kg.java.minitinder.models.Person;
 import kg.java.minitinder.models.dto.AccountCreateRequest;
 import kg.java.minitinder.models.dto.Response;
+import kg.java.minitinder.services.AccountService;
 import kg.java.minitinder.services.PersonService;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Component
+
 public class PersonServicesImpl implements PersonService {
 
     private final PersonRepository repository;
+    private final AccountService accountService;
 
-    public PersonServicesImpl(PersonRepository repository) {
+    public PersonServicesImpl(PersonRepository repository, AccountService accountService) {
         this.repository = repository;
+        this.accountService = accountService;
     }
 
     @Override
@@ -43,7 +47,20 @@ public class PersonServicesImpl implements PersonService {
 
     @Override
     public Response create(AccountCreateRequest request) {
-        return null;
+        try {
+            Account account = accountService.create(request.getLogin());
+            Person person = new Person();
+            person.setAge(request.getAge());
+            person.setLastName(request.getLastName());
+            person.setFisrtName(request.getFirstName());
+            person.setInfo(request.getInfo());
+            person.setAccount(account);
+            save(person);
+            return new Response("успешно");
+        }catch(Exception  e){
+            throw new RuntimeException(e.getMessage());
+        }
+
     }
 
 

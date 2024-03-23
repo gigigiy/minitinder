@@ -28,5 +28,5 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "slave_id")
     Person slave;
-    Date addDate;
+
 }

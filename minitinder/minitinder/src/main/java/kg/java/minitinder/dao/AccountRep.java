@@ -1,4 +1,4 @@
-package kg.java.minitinder.models.dto;
+package kg.java.minitinder.dao;
 
 import kg.java.minitinder.models.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
